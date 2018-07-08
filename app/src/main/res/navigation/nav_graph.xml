@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/firstFragment">
+
+    <fragment
+        android:id="@+id/firstFragment"
+        android:name="com.domain.navigation.FirstFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/fragment_first" >
+        <action
+            android:id="@+id/action_firstFragment_to_secondFragment"
+            app:destination="@id/secondFragment"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_firstFragment_to_thirdFragment"
+            app:destination="@id/thirdFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim">
+
+            <argument
+                android:name="fromWhere"
+                android:defaultValue="from first" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/secondFragment"
+        android:name="com.domain.navigation.SecondFragment"
+        android:label="fragment_second"
+        tools:layout="@layout/fragment_second" >
+        <action
+            android:id="@+id/action_secondFragment_to_thirdFragment"
+            app:destination="@id/thirdFragment"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" >
+
+            <argument
+                android:name="fromWhere"
+                android:defaultValue="from second" />
+        </action>
+        <deepLink app:uri="nav.com/second" />
+    </fragment>
+    <fragment
+        android:id="@+id/thirdFragment"
+        android:name="com.domain.navigation.ThirdFragment"
+        android:label="fragment_third"
+        tools:layout="@layout/fragment_third" >
+        <argument
+            android:name="fromWhere"
+            android:defaultValue="nowhere"
+            app:type="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.domain.navigation.BlankFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_blank" />
+</navigation>
