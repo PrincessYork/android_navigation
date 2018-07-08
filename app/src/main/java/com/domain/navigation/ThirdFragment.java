@@ -6,10 +6,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.navigation.Navigation;
 
 
 public class ThirdFragment extends Fragment {
+
+    private Button toNestedButton;
+    private TextView textView;
 
     public ThirdFragment() {
         // Required empty public constructor
@@ -22,12 +29,19 @@ public class ThirdFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_third, container, false);
+        View view = inflater.inflate(R.layout.fragment_third, container, false);
+
+        textView = view.findViewById(R.id.textView3);
+
+        toNestedButton = view.findViewById(R.id.to_nested_button);
+        toNestedButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_thirdFragment_to_simpleNestedGraph));
+
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         String fromWhere = ThirdFragmentArgs.fromBundle(getArguments()).getFromWhere();
-        Toast.makeText(getActivity(), fromWhere, Toast.LENGTH_SHORT).show();
+        textView.setText("Next in back-stack: " + fromWhere);
     }
 }

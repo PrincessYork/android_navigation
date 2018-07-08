@@ -12,17 +12,21 @@
         <action
             android:id="@+id/action_firstFragment_to_secondFragment"
             app:destination="@id/secondFragment"
-            app:enterAnim="@anim/nav_default_pop_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim" />
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_firstFragment_to_thirdFragment"
             app:destination="@id/thirdFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim">
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim">
 
             <argument
                 android:name="fromWhere"
-                android:defaultValue="from first" />
+                android:defaultValue="first fragment" />
         </action>
     </fragment>
     <fragment
@@ -33,12 +37,14 @@
         <action
             android:id="@+id/action_secondFragment_to_thirdFragment"
             app:destination="@id/thirdFragment"
-            app:enterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" >
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim">
 
             <argument
                 android:name="fromWhere"
-                android:defaultValue="from second" />
+                android:defaultValue="second fragment" />
         </action>
         <deepLink app:uri="nav.com/second" />
     </fragment>
@@ -51,10 +57,38 @@
             android:name="fromWhere"
             android:defaultValue="nowhere"
             app:type="string" />
+        <action
+            android:id="@+id/action_thirdFragment_to_simpleNestedGraph"
+            app:destination="@id/simpleNestedGraph"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
-    <fragment
-        android:id="@+id/blankFragment"
-        android:name="com.domain.navigation.BlankFragment"
-        android:label="fragment_blank"
-        tools:layout="@layout/fragment_blank" />
+    <navigation
+        android:id="@+id/simpleNestedGraph"
+        app:startDestination="@id/firstNestedFragment">
+        <fragment
+            android:id="@+id/secondNestedFragment"
+            android:name="com.domain.navigation.SecondNestedFragment"
+            android:label="fragment_second_nested"
+            tools:layout="@layout/fragment_second_nested" ></fragment>
+        <fragment
+            android:id="@+id/firstNestedFragment"
+            android:name="com.domain.navigation.FirstNestedFragment"
+            android:label="fragment_first_nested"
+            tools:layout="@layout/fragment_first_nested" >
+            <action
+                android:id="@+id/action_firstNestedFragment_to_secondNestedFragment"
+                app:destination="@id/secondNestedFragment" />
+        </fragment>
+        <action
+            android:id="@+id/action_global_firstFragment"
+            app:destination="@id/firstFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@+id/thirdFragment" />
+    </navigation>
 </navigation>
